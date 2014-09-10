@@ -1,0 +1,65 @@
+#:kivy 1.8.0
+
+<RootWidget>:
+    id: rootwidget
+    threadInput: threadInput
+    urlInput: urlInput
+    userAddress: userAddress
+    outputLabel: outputLabel
+    orientation: 'vertical'
+    padding: 30,30,30,30
+
+
+    Image:
+        size_hint: 1,0.5
+        source: 'logo_wide.png'
+
+    Label:
+        size_hint: 1,0.25
+        text: "Myriadcoin Qubit CPU Miner"
+
+    BoxLayout:
+        size_hint: 1,0.1
+        orientation: 'horizontal'
+        Label:
+            text: "Threads (max=# of cpu cores, min=1)"
+        TextInput:
+            id: threadInput
+            multiline: False
+            text: "1"
+
+    BoxLayout:
+        size_hint: 1,0.1
+        orientation: 'horizontal'
+        Label:
+            text: "Mining pool and port"
+        TextInput:
+            id: urlInput
+            multiline: False
+            text: "birdspool.no-ip.org:5567"
+
+    BoxLayout:
+        size_hint: 1,0.1
+        orientation: 'horizontal'
+        Label:
+            text: "Wallet address"
+        TextInput:
+            id: userAddress
+            multiline: False
+            text: "MG97oqVi6aAv3gsT4g27DNonoTYhYd5tXk"
+
+
+    BoxLayout:
+        padding: 0,30,0,30
+        size_hint: 1,0.35
+        orientation: 'horizontal'
+        Button:
+            text: "Start mining"
+            on_press: root.start_miner()
+        Button:
+            text: "Stop mining"
+            on_press: root.stop_miner()
+
+    Label:
+        id: outputLabel
+        size_hint: 1,0.2
