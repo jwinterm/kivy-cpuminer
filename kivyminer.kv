@@ -6,20 +6,21 @@
     urlInput: urlInput
     userAddress: userAddress
     outputLabel: outputLabel
+    hashrateLabel: hashrateLabel
     orientation: 'vertical'
-    padding: 30,30,30,30
+    padding: 30, 30, 30, 30
 
 
     Image:
-        size_hint: 1,0.5
+        size_hint: 1, 0.25
         source: 'logo_wide.png'
 
     Label:
-        size_hint: 1,0.25
+        size_hint: 1, 0.15
         text: "Myriadcoin Qubit CPU Miner"
 
     BoxLayout:
-        size_hint: 1,0.1
+        size_hint: 1, 0.1
         orientation: 'horizontal'
         Label:
             text: "Threads (max=# of cpu cores, min=1)"
@@ -29,7 +30,7 @@
             text: "1"
 
     BoxLayout:
-        size_hint: 1,0.1
+        size_hint: 1, 0.1
         orientation: 'horizontal'
         Label:
             text: "Mining pool and port"
@@ -39,7 +40,7 @@
             text: "birdspool.no-ip.org:5567"
 
     BoxLayout:
-        size_hint: 1,0.1
+        size_hint: 1, 0.1
         orientation: 'horizontal'
         Label:
             text: "Wallet address"
@@ -50,8 +51,8 @@
 
 
     BoxLayout:
-        padding: 0,30,0,30
-        size_hint: 1,0.35
+        padding: 0, 10, 0, 10
+        size_hint: 1, 0.2
         orientation: 'horizontal'
         Button:
             text: "Start mining"
@@ -60,6 +61,42 @@
             text: "Stop mining"
             on_press: root.stop_miner()
 
-    Label:
-        id: outputLabel
-        size_hint: 1,0.2
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint: 1, 0.35
+        BoxLayout:
+            orientation: 'vertical'
+            padding: 0, 10, 10, 10
+            size_hint: 0.75, 1
+            Label:
+                text: "Minerd output:"
+                size_hint: 0.25, 0.2
+
+            Label:
+                id: outputLabel
+                font_size: 10
+                size_hint: 1, 0.9
+                canvas.before:
+                    Color:
+                        rgb: .1, .2, .3
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+        BoxLayout:
+            orientation: 'vertical'
+            padding: 0, 10, 0, 10
+            size_hint: 0.25, 1
+            Label:
+                text: "Miner hashrate:"
+                size_hint: 0.75, 0.2
+
+            Label:
+                id: hashrateLabel
+                size_hint: 1, 0.9
+                font_size: 16
+                canvas.before:
+                    Color:
+                        rgb: .1, .2, .3
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
