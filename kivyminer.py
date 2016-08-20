@@ -44,7 +44,7 @@ class RootWidget(BoxLayout):
         try:
             if int(self.threadInput.text) <= 32:
                 self.nThreads = float(self.threadInput.text)
-                self.p = Popen(["QubitCPU32.exe", "-a", "qubit",
+                self.p = Popen([r"cpuminer-opt-3-3-8-windows\cpuminer.exe", "-a", "yescrypt",
                             "-t", self.threadInput.text, "-o", self.urlInput.text,
                             "-u", self.userAddress.text, "-p", "x"],
                             stdout=PIPE,
@@ -67,7 +67,7 @@ class RootWidget(BoxLayout):
 
 
     def stop_miner(self):
-        system("taskkill /im QubitCPU32.exe /f")
+        system("taskkill /im cpuminer.exe /f")
         self.p.kill()
         self.outputLabel.text = ''
         self.hashrateLabel.text = '0.0 khash/s'
@@ -76,9 +76,9 @@ class RootWidget(BoxLayout):
     def read_queue(self, dt):
         try:
             newLine = self.q.get_nowait()
-            if 'khash' in newLine:
-                hashrate = float(sub("[^0123456789\.]","",newLine.split(',')[1]))
-                self.hashrateLabel.text = str(hashrate*self.nThreads) + " khash/s"
+            if 'yes!' in newLine:
+                hashrate = float(sub("[^0123456789\.]","",newLine.split(',')[2]))
+                self.hashrateLabel.text = str(hashrate) + " hash/s"
             self.minerdOutput.pop(0)
             self.minerdOutput.append(newLine)
             outputText = ''
@@ -99,6 +99,6 @@ if __name__ == '__main__':
     Config.set('kivy', 'exit_on_escape', 0)
     KivyMiner().run()
     try:
-        system("taskkill /im QubitCPU32.exe /f")
+        system("taskkill /im cpuminer.exe /f")
     except:
         pass
