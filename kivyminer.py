@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from subprocess import PIPE, Popen, STDOUT
 from threading import Thread
-from Queue import Queue, Empty
+from queue import Queue, Empty
 from os import system
 from re import sub
 import sys
@@ -76,9 +76,10 @@ class RootWidget(BoxLayout):
     def read_queue(self, dt):
         try:
             newLine = self.q.get_nowait()
+            newLine = newLine.decode('utf-8')
             if 'yes!' in newLine:
                 hashrate = float(sub("[^0123456789\.]","",newLine.split(',')[2]))
-                self.hashrateLabel.text = str(hashrate) + " hash/s"
+                self.hashrateLabel.text = "{0:.2f} hash/s".format(hashrate)
             self.minerdOutput.pop(0)
             self.minerdOutput.append(newLine)
             outputText = ''
